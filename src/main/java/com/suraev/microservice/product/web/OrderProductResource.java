@@ -7,10 +7,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -25,11 +22,9 @@ public class OrderProductResource {
         this.orderContainsProductService = orderContainsProductService;
     }
 
-    @GetMapping("/checkProducts")
-    public ResponseEntity<Boolean> isProductsExist(@Valid @RequestBody Order order) {
+    @PostMapping("/checkProducts")
+    public ResponseEntity<Boolean> isProductsExist(@RequestBody Order order) {
         Set<@Valid Product> products = order.getProducts();
-
-
         return ResponseEntity.ok(orderContainsProductService.containsProducts(products));
     }
 }

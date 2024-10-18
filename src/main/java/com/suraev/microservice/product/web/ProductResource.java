@@ -33,7 +33,7 @@ public class ProductResource {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@Valid Product product) throws URISyntaxException {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to Save Product:{}", product);
         if(product.getId() != null) {
             throw new BadRequestAlertException("A new product haven't already an ID",ENTITY_NAME,"id_exist");
